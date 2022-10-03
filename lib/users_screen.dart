@@ -1,5 +1,97 @@
 import 'package:flutter/material.dart';
 
+class UsersScreen extends StatefulWidget {
+  const UsersScreen({Key? key}) : super(key: key);
+
+  @override
+  State<UsersScreen> createState() => _UsersScreenState();
+}
+
+class _UsersScreenState extends State<UsersScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'Users',
+        ),
+        centerTitle: true,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(
+          20.0,
+        ),
+        child: ListView.separated(
+          itemBuilder: (context, index) => buildUserItem(users[index]),
+          separatorBuilder: (context, index) =>
+              Padding(
+                padding: const EdgeInsetsDirectional.only(
+                  start: 25.0,
+                ),
+                child: Container(
+                  width: double.infinity,
+                  height: 1.0,
+                  color: Colors.grey[300],
+                ),
+              ),
+          itemCount: users.length,
+        ),
+      ),
+    );
+  }
+
+  Widget buildUserItem(UserModel user) =>
+      Padding(
+        padding: const EdgeInsetsDirectional.only(
+          top: 10.0,
+          end: 10.0,
+          start: 10.0,
+          bottom: 10.0,
+        ),
+        child: Row(
+          children: [
+            CircleAvatar(
+              radius: 25.0,
+              child: Text(
+                '${user.id}',
+                style: const TextStyle(
+                  fontSize: 25.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            const SizedBox(
+              width: 25.0,
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  '${user.name}',
+                  style: const TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(
+                  height: 5.0,
+                ),
+                Text(
+                  '${user.phone}',
+                  style: const TextStyle(color: Colors.blueGrey),
+                ),
+              ],
+            ),
+          ],
+        ),
+      );
+
+// 1. build Item
+// 2. build List
+// 3. Add Item to List
+}
+
 class UserModel {
   final int? id;
   final String? name;
@@ -104,89 +196,3 @@ List<UserModel> users = [
     phone: '01020082047',
   ),
 ];
-
-class UsersScreen extends StatefulWidget {
-  const UsersScreen({Key? key}) : super(key: key);
-
-  @override
-  State<UsersScreen> createState() => _UsersScreenState();
-}
-
-class _UsersScreenState extends State<UsersScreen> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Users',
-        ),
-        centerTitle: true,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(
-          20.0,
-        ),
-        child: ListView.separated(
-          itemBuilder: (context, index) => buildChatItem(users[index]),
-          separatorBuilder: (context, index) => Padding(
-            padding: const EdgeInsetsDirectional.only(
-              start: 25.0,
-            ),
-            child: Container(
-              width: double.infinity,
-              height: 1.0,
-              color: Colors.grey[300],
-            ),
-          ),
-          itemCount: users.length,
-        ),
-      ),
-    );
-  }
-
-  Widget buildChatItem(UserModel user) => Padding(
-        padding: const EdgeInsetsDirectional.only(
-          top: 10.0,
-          end: 10.0,
-          start: 10.0,
-          bottom: 10.0,
-        ),
-        child: Row(
-          children: [
-            CircleAvatar(
-              radius: 25.0,
-              child: Text(
-                '${user.id}',
-                style: const TextStyle(
-                  fontSize: 25.0,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            const SizedBox(
-              width: 25.0,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  '${user.name}',
-                  style: const TextStyle(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(
-                  height: 5.0,
-                ),
-                Text(
-                  '${user.phone}',
-                  style: const TextStyle(color: Colors.blueGrey),
-                ),
-              ],
-            ),
-          ],
-        ),
-      );
-}

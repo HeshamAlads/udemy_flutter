@@ -3,7 +3,13 @@ import 'package:flutter/material.dart';
 class MessengerScreen extends StatelessWidget {
   const MessengerScreen({Key? key}) : super(key: key);
 
-  Widget buildStoryItem() => SizedBox(
+
+// 1. build Item
+// 2. build List
+// 3. Add Item to List
+
+  Widget buildStoryItem() =>
+      SizedBox(
         width: 55.0,
         child: Column(
           children: [
@@ -48,7 +54,8 @@ class MessengerScreen extends StatelessWidget {
         ),
       );
 
-  Widget buildChatItem() => Row(
+  Widget buildChatItem() =>
+      Row(
         children: [
           Stack(
             alignment: AlignmentDirectional.bottomEnd,
@@ -213,9 +220,10 @@ class MessengerScreen extends StatelessWidget {
                 child: ListView.separated(
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) => buildStoryItem(),
-                    separatorBuilder: (context, index) => const SizedBox(
-                          width: 10.0,
-                        ),
+                    separatorBuilder: (context, index) =>
+                    const SizedBox(
+                      width: 10.0,
+                    ),
                     itemCount: 30),
               ),
               const SizedBox(
@@ -225,9 +233,10 @@ class MessengerScreen extends StatelessWidget {
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemBuilder: (context, index) => buildChatItem(),
-                  separatorBuilder: (context, index) => const SizedBox(
-                        height: 10.0,
-                      ),
+                  separatorBuilder: (context, index) =>
+                  const SizedBox(
+                    height: 10.0,
+                  ),
                   itemCount: 50),
             ],
           ),
