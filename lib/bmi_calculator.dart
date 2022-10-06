@@ -336,7 +336,7 @@ class _BmiCalculatorState extends State<BmiCalculator> {
                   ),
                 );
               },
-              color: Colors.blue,
+              color: Colors.green,
               child: const Text(
                 'CALCULATOR',
                 style: TextStyle(
