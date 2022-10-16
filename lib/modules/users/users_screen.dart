@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:udemy_flutter/models/user/user_model.dart';
 
 class UsersScreen extends StatefulWidget {
   const UsersScreen({Key? key}) : super(key: key);
@@ -23,25 +24,23 @@ class _UsersScreenState extends State<UsersScreen> {
         ),
         child: ListView.separated(
           itemBuilder: (context, index) => buildUserItem(users[index]),
-          separatorBuilder: (context, index) =>
-              Padding(
-                padding: const EdgeInsetsDirectional.only(
-                  start: 25.0,
-                ),
-                child: Container(
-                  width: double.infinity,
-                  height: 1.0,
-                  color: Colors.grey[300],
-                ),
-              ),
+          separatorBuilder: (context, index) => Padding(
+            padding: const EdgeInsetsDirectional.only(
+              start: 25.0,
+            ),
+            child: Container(
+              width: double.infinity,
+              height: 1.0,
+              color: Colors.grey[300],
+            ),
+          ),
           itemCount: users.length,
         ),
       ),
     );
   }
 
-  Widget buildUserItem(UserModel user) =>
-      Padding(
+  Widget buildUserItem(UserModel user) => Padding(
         padding: const EdgeInsetsDirectional.only(
           top: 10.0,
           end: 10.0,
@@ -90,18 +89,6 @@ class _UsersScreenState extends State<UsersScreen> {
 // 1. build Item
 // 2. build List
 // 3. Add Item to List
-}
-
-class UserModel {
-  final int? id;
-  final String? name;
-  final String? phone;
-
-  UserModel({
-    required this.id,
-    required this.name,
-    required this.phone,
-  });
 }
 
 List<UserModel> users = [
