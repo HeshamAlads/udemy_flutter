@@ -27,14 +27,18 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Center(
           child: SingleChildScrollView(
             child: Form(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
               key: formKey,
               child: Column(
                 children: [
-                  const Text(
-                    'Login',
-                    style: TextStyle(
-                      fontSize: 30.0,
-                      fontWeight: FontWeight.bold,
+                  const Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'Login',
+                      style: TextStyle(
+                        fontSize: 30.0,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                   const SizedBox(
@@ -43,14 +47,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   TextFormField(
                     controller: emailController,
                     keyboardType: TextInputType.emailAddress,
-                    onFieldSubmitted: (value) {
-                      debugPrint(value);
-                    },
-                    onChanged: (value) {
-                      debugPrint(value);
-                    },
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
+                    // onFieldSubmitted: (value) {
+                    //   debugPrint(value);
+                    // },
+                    // onChanged: (value) {
+                    //   debugPrint(value);
+                    // },
+                    validator: (String? value) {
+                      if (value!.isEmpty) {
                         return 'Email can\'t be empty';
                       }
                       return null;
@@ -68,18 +72,18 @@ class _LoginScreenState extends State<LoginScreen> {
                   TextFormField(
                     controller: passwordController,
                     keyboardType: TextInputType.visiblePassword,
+                    // onFieldSubmitted: (value) {
+                    //   debugPrint(value);
+                    // },
+                    // onChanged: (value) {
+                    //   debugPrint(value);
+                    // },
                     obscureText: true,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
+                    validator: (String? value) {
+                      if (value!.isEmpty) {
                         return 'Password can\'t be empty';
                       }
                       return null;
-                    },
-                    onFieldSubmitted: (value) {
-                      debugPrint(value);
-                    },
-                    onChanged: (value) {
-                      debugPrint(value);
                     },
                     decoration: const InputDecoration(
                       labelText: 'Password',
@@ -92,12 +96,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(
                     height: 20.0,
                   ),
-                  defaultButton(
+                  Components.defaultButton(
                     text: 'login',
                     function: () {
                       if (formKey.currentState!.validate()) {
                         debugPrint(emailController.text);
-                        debugPrint(emailController.text);
+                        debugPrint(passwordController.text);
                       }
                     },
                   ),
