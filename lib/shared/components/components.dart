@@ -17,7 +17,9 @@ class Components {
           borderRadius: BorderRadius.circular(radius),
         ),
         child: MaterialButton(
-          onPressed: () => function(),
+          onPressed: () {
+            function();
+          },
           child: Text(
             isUpperCase ? text.toUpperCase() : text,
             style: const TextStyle(
@@ -25,6 +27,45 @@ class Components {
               color: Colors.white,
             ),
           ),
+        ),
+      );
+
+  static Widget defaultFormField({
+    required TextEditingController controller,
+    required TextInputType type,
+    Function? onSubmit,
+    Function? onChanged,
+    required Function validate,
+    bool isPassword = false,
+    required String label,
+    required String hint,
+    IconData? prefix,
+    IconData? suffix,
+    Function? onTapEye,
+  }) =>
+      TextFormField(
+        controller: controller,
+        keyboardType: type,
+        onFieldSubmitted: (s) {
+          onSubmit ?? (s);
+        },
+        onChanged: (s) {
+          onChanged ?? (s);
+        },
+        obscureText: isPassword,
+        validator: (value) {
+          return validate(value);
+        },
+        // (value) => validate(value),
+        decoration: InputDecoration(
+          labelText: label,
+          hintText: hint,
+          prefixIcon: Icon(prefix),
+          suffixIcon: IconButton(
+            onPressed: () => onTapEye!(),
+            icon: Icon(suffix),
+          ),
+          border: const OutlineInputBorder(),
         ),
       );
 }

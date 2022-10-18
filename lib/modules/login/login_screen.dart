@@ -17,6 +17,7 @@ class _LoginScreenState extends State<LoginScreen> {
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
   var formKey = GlobalKey<FormState>();
+  bool isPassword = true;
 
   @override
   Widget build(BuildContext context) {
@@ -31,67 +32,66 @@ class _LoginScreenState extends State<LoginScreen> {
               key: formKey,
               child: Column(
                 children: [
-                  const Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      'Login',
-                      style: TextStyle(
-                        fontSize: 30.0,
-                        fontWeight: FontWeight.bold,
-                      ),
+                  const Text(
+                    'Login',
+                    style: TextStyle(
+                      fontSize: 30.0,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(
                     height: 40.0,
                   ),
-                  TextFormField(
+                  Components.defaultFormField(
                     controller: emailController,
-                    keyboardType: TextInputType.emailAddress,
-                    // onFieldSubmitted: (value) {
-                    //   debugPrint(value);
-                    // },
-                    // onChanged: (value) {
-                    //   debugPrint(value);
-                    // },
-                    validator: (String? value) {
-                      if (value!.isEmpty) {
+                    type: TextInputType.emailAddress,
+                    validate: (value) {
+                      if (value.isEmpty) {
                         return 'Email can\'t be empty';
                       }
-                      return null;
                     },
-                    decoration: const InputDecoration(
-                      labelText: 'Email Address',
-                      hintText: 'Email Address',
-                      prefixIcon: Icon(Icons.email),
-                      border: OutlineInputBorder(),
-                    ),
+                    onSubmit: () {
+                      debugPrint(emailController.text);
+                      debugPrint(passwordController.text);
+                    },
+                    onChanged: () {
+                      debugPrint(emailController.text);
+                      debugPrint(passwordController.text);
+                    },
+                    label: 'EmailAddress',
+                    hint: 'EmailAddress',
+                    prefix: Icons.email,
                   ),
                   const SizedBox(
                     height: 20.0,
                   ),
-                  TextFormField(
+                  Components.defaultFormField(
                     controller: passwordController,
-                    keyboardType: TextInputType.visiblePassword,
-                    // onFieldSubmitted: (value) {
-                    //   debugPrint(value);
-                    // },
-                    // onChanged: (value) {
-                    //   debugPrint(value);
-                    // },
-                    obscureText: true,
-                    validator: (String? value) {
-                      if (value!.isEmpty) {
+                    type: TextInputType.visiblePassword,
+                    validate: (value) {
+                      if (value.isEmpty) {
                         return 'Password can\'t be empty';
                       }
-                      return null;
                     },
-                    decoration: const InputDecoration(
-                      labelText: 'Password',
-                      hintText: 'Password',
-                      prefixIcon: Icon(Icons.lock),
-                      suffixIcon: Icon(Icons.remove_red_eye),
-                      border: OutlineInputBorder(),
-                    ),
+                    onSubmit: () {
+                      debugPrint(emailController.text);
+                      debugPrint(passwordController.text);
+                    },
+                    onChanged: () {
+                      debugPrint(emailController.text);
+                      debugPrint(passwordController.text);
+                    },
+                    isPassword: isPassword,
+                    label: 'Password',
+                    hint: 'Password',
+                    prefix: Icons.lock,
+                    suffix:
+                        isPassword ? Icons.visibility : Icons.visibility_off,
+                    onTapEye: () {
+                      setState(() {
+                        isPassword = !isPassword;
+                      });
+                    },
                   ),
                   const SizedBox(
                     height: 20.0,
