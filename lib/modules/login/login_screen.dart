@@ -44,10 +44,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     controller: emailController,
                     keyboardType: TextInputType.emailAddress,
                     onFieldSubmitted: (value) {
-                      print(value);
+                      debugPrint(value);
                     },
                     onChanged: (value) {
-                      print(value);
+                      debugPrint(value);
                     },
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -71,15 +71,15 @@ class _LoginScreenState extends State<LoginScreen> {
                     obscureText: true,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Email can\'t be empty';
+                        return 'Password can\'t be empty';
                       }
                       return null;
                     },
                     onFieldSubmitted: (value) {
-                      print(value);
+                      debugPrint(value);
                     },
                     onChanged: (value) {
-                      print(value);
+                      debugPrint(value);
                     },
                     decoration: const InputDecoration(
                       labelText: 'Password',
@@ -96,8 +96,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     text: 'login',
                     function: () {
                       if (formKey.currentState!.validate()) {
-                        print(emailController.text);
-                        print(emailController.text);
+                        debugPrint(emailController.text);
+                        debugPrint(emailController.text);
                       }
                     },
                   ),
