@@ -28,8 +28,8 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Center(
           child: SingleChildScrollView(
             child: Form(
-              autovalidateMode: AutovalidateMode.onUserInteraction,
               key: formKey,
+              // autovalidateMode: AutovalidateMode.onUserInteraction,
               child: Column(
                 children: [
                   const Text(

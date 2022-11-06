@@ -35,6 +35,7 @@ class Components {
     required TextInputType type,
     Function? onSubmit,
     Function? onChanged,
+    Function? onTap,
     required Function validate,
     bool isPassword = false,
     required String label,
@@ -47,10 +48,16 @@ class Components {
         controller: controller,
         keyboardType: type,
         onFieldSubmitted: (s) {
-          onSubmit ?? (s);
+          onSubmit!(s);
+          // other code >> onSubmit ?? (s);
         },
         onChanged: (s) {
           onChanged ?? (s);
+          // if onChanged not != null : onChanged(value); <<<< hint <<<<
+          // if (onChanged != null) { onChanged(value); } (this code)
+        },
+        onTap: () {
+          onTap!();
         },
         obscureText: isPassword,
         validator: (value) {
@@ -66,6 +73,36 @@ class Components {
             icon: Icon(suffix),
           ),
           border: const OutlineInputBorder(),
+        ),
+      );
+
+  static Widget buildTaskItem(Map model) => Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Row(
+          children: [
+            CircleAvatar(
+              radius: 40.0,
+              child: Text('${model['time']}'),
+            ),
+            const SizedBox(
+              width: 20.0,
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text('${model['title']}',
+                    style: const TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
+                    )),
+                Text('${model['date']}',
+                    style: const TextStyle(
+                      color: Colors.grey,
+                    )),
+              ],
+            )
+          ],
         ),
       );
 }
